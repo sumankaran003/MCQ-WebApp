@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <style>
+      <style>
+
+         .flex-container{
+         width: 80%;
+         min-height: 300px;
+         margin: 0 auto;
+         display: -webkit-flex; /* Safari */
+         display: flex; /* Standard syntax */
+         }
+         .flex-container .column{
+         padding: 10px;
+         background: #dbdfe5;
+         -webkit-flex: 1; /* Safari */
+         -ms-flex: 1; /* IE 10 */
+         flex: 1; /* Standard syntax */
+         }
+         .flex-container .column.bg-alt{
+         background: #b4bac0;
+         }
+
+         .button {
+     background-color: #4CAF50; /* Green */
+     border: none;
+     color: white;
+     padding: 15px 32px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 16px;
+     margin: 4px 2px;
+     cursor: pointer;
+   }
+   .button3 {
+     width: 100%;
+   }
+   button:hover {
+  font-size: 20px;
+  border:5px #000000;
+}
+      </style>
+      </style>
+   </head>
+   <body style = " font-family: Helvetica;">
+      <h1 style = "text-align: center;">Please Select the most appropriate choice :</h1>
+      <h4  style = "text-align: center;color:#4CAF50">Maturity Level : <%= level.userType%> </h4>
+      <form  method="post" action="/questions">
+        <% ques.forEach(function(eachItem) {%>
+          <% if(eachItem.tweetId === "") {%>
+            <% return; } //In JavaScript EJS return works as continue in forEach %>
+         <div class="flex-container" style="border:3px solid #4CAF50">
+            <div class="column">
+               <h2 style = "color:red">
+                 <%= eachItem.tweetId %>
+                 <%= eachItem.tweetText %>
+               </h2>
+               <h3>When asked by your friend:</h3>
+               <input type="radio" name= <%= eachItem.tweetId +"Friend"%> value="Insult">Insult</input> &nbsp;&nbsp;&nbsp;
+               <input type="radio" name= <%= eachItem.tweetId +"Friend"%> value="Humour">Humour</input>&nbsp;&nbsp;&nbsp;
+               <input type="radio" name= <%= eachItem.tweetId+"Friend"%> value="Neutral">Neutral</input>
+            </div>
+            <div class="column bg-alt">
+               <h3>Somebody else:</h3>
+               <input type="radio" name=<%= eachItem.tweetId %> value="Insult">Insult</input>&nbsp;&nbsp;&nbsp;
+               <input type="radio" name=<%= eachItem.tweetId %> value="Humour">Humour</input> &nbsp;&nbsp;&nbsp;
+               <input type="radio" name=<%= eachItem.tweetId %> value="Neutral">Neutral</input>
+               <br><br>
+            </div>
+         </div>
+         <%});%>
+        <button type="submit" class="button button3">Submit Response and Proceed</button>
+      </form>
+   </body>
+</html>
